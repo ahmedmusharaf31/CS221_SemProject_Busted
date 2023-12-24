@@ -5,6 +5,8 @@
 #include <queue>
 #include <cstdlib>
 #include <ctime>
+#include <sstream>
+#include <limits> // for std::numeric_limits
 
 using namespace std;
 
@@ -67,6 +69,7 @@ public:
         mergeSort(studentsArray.begin(), studentsArray.end(), [](const Student &a, const Student &b)
                   { return a.name < b.name; });
     }
+    
 
 private:
     // Merge Sort implementation for vector of Students
@@ -282,28 +285,47 @@ private:
         }
     }
 };
+
 int main()
 {
-    // Creating instances of the classes
     ArrayBasedList arrayBasedList;
     LinkedList linkedList;
     BookManagementSystem bookManagementSystem;
     BinarySearchTree binarySearchTree;
 
     // Adding sample students to the array-based list
-    arrayBasedList.addStudent("John Doe", 12345, 20);
-    arrayBasedList.addStudent("Alice Smith", 67890, 22);
-    arrayBasedList.addStudent("Bob Johnson", 54321, 21);
+    string name;
+    int studentID, age;
+
+    // Taking user input for the array-based list
+    cout << "Enter student information for Array-Based List:\n";
+    for (int i = 0; i < 3; ++i)
+    {
+        cout << "Student " << i + 1 << ":\n";
+        cout << "Name: ";
+        getline(cin, name);
+        cout << "Student ID: ";
+        cin >> studentID;
+        cout << "Age: ";
+        cin >> age;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
+
+        arrayBasedList.addStudent(name, studentID, age);
+    }
 
     // Displaying the unsorted array
+    cout << "Array-Based List before sorting:\n";
     arrayBasedList.displayStudents();
 
     // Sorting and displaying the array
     arrayBasedList.sortStudents();
+    cout << "Array-Based List after sorting:\n";
     arrayBasedList.displayStudents();
 
     // Searching for a student by name
-    string searchName = "Alice Smith";
+    string searchName;
+    cout << "Enter a name to search: ";
+    getline(cin, searchName);
     Student *foundStudent = arrayBasedList.searchStudent(searchName);
 
     if (foundStudent != nullptr)
@@ -316,27 +338,53 @@ int main()
     }
 
     // Adding sample students to the linked list
-    linkedList.addStudent("John Doe", 12345, 20);
-    linkedList.addStudent("Alice Smith", 67890, 22);
-    linkedList.addStudent("Bob Johnson", 54321, 21);
+    cout << "\nEnter student information for Linked List:\n";
+    for (int i = 0; i < 3; ++i)
+    {
+        cout << "Student " << i + 1 << ":\n";
+        cout << "Name: ";
+        getline(cin, name);
+        cout << "Student ID: ";
+        cin >> studentID;
+        cout << "Age: ";
+        cin >> age;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
+
+        linkedList.addStudent(name, studentID, age);
+    }
 
     // Displaying the linked list
+    cout << "Linked List:\n";
     linkedList.displayStudents();
 
     // Deleting a student by name
-    string deleteName = "Alice Smith";
-    linkedList.deleteStudent(deleteName);
+    cout << "Enter the name of the student to delete from the linked list: ";
+    getline(cin, name);
+    linkedList.deleteStudent(name);
 
     // Displaying the updated linked list
+    cout << "Linked List after deletion:\n";
     linkedList.displayStudents();
 
     // Adding sample students to the binary search tree
-    binarySearchTree.addStudent("John Doe", 12345, 20);
-    binarySearchTree.addStudent("Alice Smith", 67890, 22);
-    binarySearchTree.addStudent("Bob Johnson", 54321, 21);
+    cout << "\nEnter student information for Binary Search Tree:\n";
+    for (int i = 0; i < 3; ++i)
+    {
+        cout << "Student " << i + 1 << ":\n";
+        cout << "Name: ";
+        getline(cin, name);
+        cout << "Student ID: ";
+        cin >> studentID;
+        cout << "Age: ";
+        cin >> age;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
+
+        binarySearchTree.addStudent(name, studentID, age);
+    }
 
     // Searching for a student by name in the binary search tree
-    searchName = "Alice Smith"; // Note: Reusing the variable name
+    cout << "Enter a name to search in the Binary Search Tree: ";
+    getline(cin, searchName);
     foundStudent = binarySearchTree.searchStudent(searchName);
 
     if (foundStudent != nullptr)
