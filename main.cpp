@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <stack>
 #include <queue>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -34,15 +36,17 @@ public:
     }
 
     // Function to search for a student by name
-    Student* searchStudent(const string &name)
+    Student *searchStudent(const string &name)
     {
-        auto it = find_if(studentsArray.begin(), studentsArray.end(), [&](const Student &s) {
-            return s.name == name;
-        });
+        auto it = find_if(studentsArray.begin(), studentsArray.end(), [&](const Student &s)
+                          { return s.name == name; });
 
-        if (it != studentsArray.end()) {
+        if (it != studentsArray.end())
+        {
             return &(*it); // Return pointer to the found student
-        } else {
+        }
+        else
+        {
             return nullptr; // Return nullptr if not found
         }
     }
@@ -60,9 +64,8 @@ public:
     // Function to sort students using Merge Sort
     void sortStudents()
     {
-        mergeSort(studentsArray.begin(), studentsArray.end(), [](const Student &a, const Student &b) {
-            return a.name < b.name;
-        });
+        mergeSort(studentsArray.begin(), studentsArray.end(), [](const Student &a, const Student &b)
+                  { return a.name < b.name; });
     }
 
 private:
@@ -116,7 +119,7 @@ public:
             current->next = newNode;
         }
     }
-// Function to display all students in the linked list
+    // Function to display all students in the linked list
     void displayStudents()
     {
         cout << "Linked List of Students:\n";
