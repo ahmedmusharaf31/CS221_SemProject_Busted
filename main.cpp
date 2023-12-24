@@ -1,177 +1,177 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <stack>
 #include <queue>
 #include <cstdlib>
 #include <ctime>
 #include <sstream>
 #include <limits> // for std::numeric_limits
+#include "array.cpp"
+#include "linked_list.cpp"
 
 using namespace std;
 
-struct Student
-{
-    string name;
-    int studentID;
-    int age;
+// struct Student
+// {
+//     string name;
+//     int studentID;
+//     int age;
 
-    Student(const string &name, int studentID, int age)
-    {
-        this->name = name;
-        this->studentID = studentID;
-        this->age = age;
-    }
-};
+//     Student(const string &name, int studentID, int age)
+//     {
+//         this->name = name;
+//         this->studentID = studentID;
+//         this->age = age;
+//     }
+// };
 
-class ArrayBasedList
-{
-private:
-    vector<Student> studentsArray;
+// class ArrayBasedList
+// {
+// private:
+//     vector<Student> studentsArray;
 
-public:
-    // Function to add a student to the array
-    void addStudent(const string &name, int studentID, int age)
-    {
-        Student student(name, studentID, age);
-        studentsArray.push_back(student);
-    }
+// public:
+//     // Function to add a student to the array
+//     void addStudent(const string &name, int studentID, int age)
+//     {
+//         Student student(name, studentID, age);
+//         studentsArray.push_back(student);
+//     }
 
-    // Function to search for a student by name
-    Student *searchStudent(const string &name)
-    {
-        auto it = find_if(studentsArray.begin(), studentsArray.end(), [&](const Student &s)
-                          { return s.name == name; });
+//     // Function to search for a student by name
+//     Student *searchStudent(const string &name)
+//     {
+//         auto it = find_if(studentsArray.begin(), studentsArray.end(), [&](const Student &s)
+//                           { return s.name == name; });
 
-        if (it != studentsArray.end())
-        {
-            return &(*it); // Return pointer to the found student
-        }
-        else
-        {
-            return nullptr; // Return nullptr if not found
-        }
-    }
+//         if (it != studentsArray.end())
+//         {
+//             return &(*it); // Return pointer to the found student
+//         }
+//         else
+//         {
+//             return nullptr; // Return nullptr if not found
+//         }
+//     }
 
-    // Function to display all students in the array
-    void displayStudents()
-    {
-        cout << "Array-Based List of Students:\n";
-        for (const auto &student : studentsArray)
-        {
-            cout << "Name: " << student.name << ", ID: " << student.studentID << ", Age: " << student.age << endl;
-        }
-    }
+//     // Function to display all students in the array
+//     void displayStudents()
+//     {
+//         cout << "Array-Based List of Students:\n";
+//         for (const auto &student : studentsArray)
+//         {
+//             cout << "Name: " << student.name << ", ID: " << student.studentID << ", Age: " << student.age << endl;
+//         }
+//     }
 
-    // Function to sort students using Merge Sort
-    void sortStudents()
-    {
-        mergeSort(studentsArray.begin(), studentsArray.end(), [](const Student &a, const Student &b)
-                  { return a.name < b.name; });
-    }
-    
+//     // Function to sort students using Merge Sort
+//     void sortStudents()
+//     {
+//         mergeSort(studentsArray.begin(), studentsArray.end(), [](const Student &a, const Student &b)
+//                   { return a.name < b.name; });
+//     }
 
-private:
-    // Merge Sort implementation for vector of Students
-    template <typename RandomIt, typename Compare>
-    void mergeSort(RandomIt first, RandomIt last, Compare comp)
-    {
-        if (last - first > 1)
-        {
-            auto mid = first + (last - first) / 2;
-            mergeSort(first, mid, comp);
-            mergeSort(mid, last, comp);
-            inplace_merge(first, mid, last, comp);
-        }
-    }
-};
+// private:
+//     // Merge Sort implementation for vector of Students
+//     template <typename RandomIt, typename Compare>
+//     void mergeSort(RandomIt first, RandomIt last, Compare comp)
+//     {
+//         if (last - first > 1)
+//         {
+//             auto mid = first + (last - first) / 2;
+//             mergeSort(first, mid, comp);
+//             mergeSort(mid, last, comp);
+//             inplace_merge(first, mid, last, comp);
+//         }
+//     }
+// };
 
-class LinkedList
-{
-private:
-    struct Node
-    {
-        Student data;
-        Node *next;
+// class LinkedList
+// {
+// private:
+//     struct Node
+//     {
+//         Student data;
+//         Node *next;
 
-        Node(const Student &data) : data(data), next(nullptr) {}
-    };
+//         Node(const Student &data) : data(data), next(nullptr) {}
+//     };
 
-    Node *head;
+//     Node *head;
 
-public:
-    LinkedList() : head(nullptr) {}
+// public:
+//     LinkedList() : head(nullptr) {}
 
-    // Function to add a student to the linked list
-    void addStudent(const string &name, int studentID, int age)
-    {
-        Student student(name, studentID, age);
-        Node *newNode = new Node(student);
+//     // Function to add a student to the linked list
+//     void addStudent(const string &name, int studentID, int age)
+//     {
+//         Student student(name, studentID, age);
+//         Node *newNode = new Node(student);
 
-        if (head == nullptr)
-        {
-            head = newNode;
-        }
-        else
-        {
-            Node *current = head;
-            while (current->next != nullptr)
-            {
-                current = current->next;
-            }
-            current->next = newNode;
-        }
-    }
-    // Function to display all students in the linked list
-    void displayStudents()
-    {
-        cout << "Linked List of Students:\n";
-        Node *current = head;
-        while (current != nullptr)
-        {
-            cout << "Name: " << current->data.name << ", ID: " << current->data.studentID << ", Age: " << current->data.age << endl;
-            current = current->next;
-        }
-    }
+//         if (head == nullptr)
+//         {
+//             head = newNode;
+//         }
+//         else
+//         {
+//             Node *current = head;
+//             while (current->next != nullptr)
+//             {
+//                 current = current->next;
+//             }
+//             current->next = newNode;
+//         }
+//     }
+//     // Function to display all students in the linked list
+//     void displayStudents()
+//     {
+//         cout << "Linked List of Students:\n";
+//         Node *current = head;
+//         while (current != nullptr)
+//         {
+//             cout << "Name: " << current->data.name << ", ID: " << current->data.studentID << ", Age: " << current->data.age << endl;
+//             current = current->next;
+//         }
+//     }
 
-    // Function to delete a student from the linked list by name
-    void deleteStudent(const string &name)
-    {
-        if (head == nullptr)
-        {
-            cout << "Linked List is empty. Cannot delete.\n";
-            return;
-        }
+//     // Function to delete a student from the linked list by name
+//     void deleteStudent(const string &name)
+//     {
+//         if (head == nullptr)
+//         {
+//             cout << "Linked List is empty. Cannot delete.\n";
+//             return;
+//         }
 
-        if (head->data.name == name)
-        {
-            Node *temp = head;
-            head = head->next;
-            delete temp;
-            cout << "Student deleted: " << name << endl;
-            return;
-        }
+//         if (head->data.name == name)
+//         {
+//             Node *temp = head;
+//             head = head->next;
+//             delete temp;
+//             cout << "Student deleted: " << name << endl;
+//             return;
+//         }
 
-        Node *current = head;
-        Node *prev = nullptr;
+//         Node *current = head;
+//         Node *prev = nullptr;
 
-        while (current != nullptr && current->data.name != name)
-        {
-            prev = current;
-            current = current->next;
-        }
+//         while (current != nullptr && current->data.name != name)
+//         {
+//             prev = current;
+//             current = current->next;
+//         }
 
-        if (current == nullptr)
-        {
-            cout << "Student not found with name: " << name << ". Cannot delete.\n";
-            return;
-        }
+//         if (current == nullptr)
+//         {
+//             cout << "Student not found with name: " << name << ". Cannot delete.\n";
+//             return;
+//         }
 
-        prev->next = current->next;
-        delete current;
-        cout << "Student deleted: " << name << endl;
-    }
-};
+//         prev->next = current->next;
+//         delete current;
+//         cout << "Student deleted: " << name << endl;
+//     }
+// };
 
 class BookManagementSystem
 {
