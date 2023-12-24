@@ -279,12 +279,15 @@ private:
         }
     }
 };
-
 int main()
 {
+    // Creating instances of the classes
     ArrayBasedList arrayBasedList;
+    LinkedList linkedList;
+    BookManagementSystem bookManagementSystem;
+    BinarySearchTree binarySearchTree;
 
-    // Adding sample students to the array
+    // Adding sample students to the array-based list
     arrayBasedList.addStudent("John Doe", 12345, 20);
     arrayBasedList.addStudent("Alice Smith", 67890, 22);
     arrayBasedList.addStudent("Bob Johnson", 54321, 21);
@@ -309,8 +312,7 @@ int main()
         cout << "Student not found with name: " << searchName << endl;
     }
 
-        LinkedList linkedList;
-         // Adding sample students to the linked list
+    // Adding sample students to the linked list
     linkedList.addStudent("John Doe", 12345, 20);
     linkedList.addStudent("Alice Smith", 67890, 22);
     linkedList.addStudent("Bob Johnson", 54321, 21);
@@ -324,28 +326,15 @@ int main()
 
     // Displaying the updated linked list
     linkedList.displayStudents();
-    // Creating instances of the classes
-    ArrayBasedList arrayBasedList;
-    LinkedList linkedList;
-    BookManagementSystem bookManagementSystem;
-    BinarySearchTree binarySearchTree;
 
-    // Adding sample students to the array-based list, linked list, and binary search tree
-    arrayBasedList.addStudent("John Doe", 12345, 20);
-    arrayBasedList.addStudent("Alice Smith", 67890, 22);
-    arrayBasedList.addStudent("Bob Johnson", 54321, 21);
-
-    linkedList.addStudent("John Doe", 12345, 20);
-    linkedList.addStudent("Alice Smith", 67890, 22);
-    linkedList.addStudent("Bob Johnson", 54321, 21);
-
+    // Adding sample students to the binary search tree
     binarySearchTree.addStudent("John Doe", 12345, 20);
     binarySearchTree.addStudent("Alice Smith", 67890, 22);
     binarySearchTree.addStudent("Bob Johnson", 54321, 21);
 
     // Searching for a student by name in the binary search tree
-    string searchName = "Alice Smith";
-    Student *foundStudent = binarySearchTree.searchStudent(searchName);
+    searchName = "Alice Smith"; // Note: Reusing the variable name
+    foundStudent = binarySearchTree.searchStudent(searchName);
 
     if (foundStudent != nullptr)
     {
