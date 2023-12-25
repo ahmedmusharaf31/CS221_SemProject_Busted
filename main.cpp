@@ -285,7 +285,6 @@ private:
         }
     }
 };
-
 int main()
 {
     ArrayBasedList arrayBasedList;
@@ -293,108 +292,124 @@ int main()
     BookManagementSystem bookManagementSystem;
     BinarySearchTree binarySearchTree;
 
-    // Adding sample students to the array-based list
-    string name;
-    int studentID, age;
+    int choice;
 
-    // Taking user input for the array-based list
-    cout << "Enter student information for Array-Based List:\n";
-    for (int i = 0; i < 3; ++i)
+    do
     {
-        cout << "Student " << i + 1 << ":\n";
-        cout << "Name: ";
-        getline(cin, name);
-        cout << "Student ID: ";
-        cin >> studentID;
-        cout << "Age: ";
-        cin >> age;
+        string name; // Declare 'name' here to make it accessible in the entire loop
+
+        cout << "\nLibrary Management System Menu:\n";
+        cout << "1. Add Student\n";
+        cout << "2. Search Student\n";
+        cout << "3. Display Students\n";
+        cout << "4. Sort Students\n";
+        cout << "5. Delete Student\n";
+        cout << "6. Checkout Book\n";
+        cout << "7. Return Book\n";
+        cout << "8. Display Checked Out Books\n";
+        cout << "9. Display Return Queue\n";
+        cout << "10. Exit\n";
+
+        cout << "Enter your choice: ";
+        cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
 
-        arrayBasedList.addStudent(name, studentID, age);
-    }
+        switch (choice)
+        {
+        case 1:
+        {
+            // Add Student
+            int studentID, age;
+            cout << "Enter student information:\n";
+            cout << "Name: ";
+            getline(cin, name);
+            cout << "Student ID: ";
+            cin >> studentID;
+            cout << "Age: ";
+            cin >> age;
 
-    // Displaying the unsorted array
-    cout << "Array-Based List before sorting:\n";
-    arrayBasedList.displayStudents();
+            arrayBasedList.addStudent(name, studentID, age);
+            break;
+        }
+        case 2:
+        {
+            // Search Student
+            cout << "Enter a name to search: ";
+            getline(cin, name);
+            Student *foundStudent = arrayBasedList.searchStudent(name);
+            if (foundStudent != nullptr)
+            {
+                cout << "Student found: " << foundStudent->name << ", ID: " << foundStudent->studentID << ", Age: " << foundStudent->age << endl;
+            }
+            else
+            {
+                cout << "Student not found with name: " << name << endl;
+            }
+            break;
+        }
+        case 3:
+        {
+            // Display Students
+            arrayBasedList.displayStudents();
+            break;
+        }
+        case 4:
+        {
+            // Sort Students
+            arrayBasedList.sortStudents();
+            cout << "Array-Based List after sorting:\n";
+            arrayBasedList.displayStudents();
+            break;
+        }
+        case 5:
+        {
+            // Delete Student
+            cout << "Enter the name of the student to delete: ";
+            getline(cin, name);
+            linkedList.deleteStudent(name);
+            break;
+        }
+        case 6:
+        {
+            // Checkout Book
+            cout << "Enter the title of the book to checkout: ";
+            getline(cin, name);
+            bookManagementSystem.checkoutBook(name);
+            break;
+        }
+        case 7:
+        {
+            // Return Book
+            cout << "Enter the title of the book to return: ";
+            getline(cin, name);
+            bookManagementSystem.returnBook(name);
+            break;
+        }
+        case 8:
+        {
+            // Display Checked Out Books
+            bookManagementSystem.displayCheckedOutBooks();
+            break;
+        }
+        case 9:
+        {
+            // Display Return Queue
+            bookManagementSystem.displayReturnQueue();
+            break;
+        }
+        case 10:
+        {
+            // Exit
+            cout << "Exiting the Library Management System. Goodbye!\n";
+            break;
+        }
+        default:
+        {
+            cout << "Invalid choice. Please enter a valid option.\n";
+        }
+        }
 
-    // Sorting and displaying the array
-    arrayBasedList.sortStudents();
-    cout << "Array-Based List after sorting:\n";
-    arrayBasedList.displayStudents();
-
-    // Searching for a student by name
-    string searchName;
-    cout << "Enter a name to search: ";
-    getline(cin, searchName);
-    Student *foundStudent = arrayBasedList.searchStudent(searchName);
-
-    if (foundStudent != nullptr)
-    {
-        cout << "Student found: " << foundStudent->name << ", ID: " << foundStudent->studentID << ", Age: " << foundStudent->age << endl;
-    }
-    else
-    {
-        cout << "Student not found with name: " << searchName << endl;
-    }
-
-    // Adding sample students to the linked list
-    cout << "\nEnter student information for Linked List:\n";
-    for (int i = 0; i < 3; ++i)
-    {
-        cout << "Student " << i + 1 << ":\n";
-        cout << "Name: ";
-        getline(cin, name);
-        cout << "Student ID: ";
-        cin >> studentID;
-        cout << "Age: ";
-        cin >> age;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
-
-        linkedList.addStudent(name, studentID, age);
-    }
-
-    // Displaying the linked list
-    cout << "Linked List:\n";
-    linkedList.displayStudents();
-
-    // Deleting a student by name
-    cout << "Enter the name of the student to delete from the linked list: ";
-    getline(cin, name);
-    linkedList.deleteStudent(name);
-
-    // Displaying the updated linked list
-    cout << "Linked List after deletion:\n";
-    linkedList.displayStudents();
-
-    // Adding sample students to the binary search tree
-    cout << "\nEnter student information for Binary Search Tree:\n";
-    for (int i = 0; i < 3; ++i)
-    {
-        cout << "Student " << i + 1 << ":\n";
-        cout << "Name: ";
-        getline(cin, name);
-        cout << "Student ID: ";
-        cin >> studentID;
-        cout << "Age: ";
-        cin >> age;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
-
-        binarySearchTree.addStudent(name, studentID, age);
-    }
-
-    // Searching for a student by name in the binary search tree
-    cout << "Enter a name to search in the Binary Search Tree: ";
-    getline(cin, searchName);
-    foundStudent = binarySearchTree.searchStudent(searchName);
-
-    if (foundStudent != nullptr)
-    {
-        cout << "Student found: " << foundStudent->name << ", ID: " << foundStudent->studentID << ", Age: " << foundStudent->age << endl;
-    }
-    else
-    {
-        cout << "Student not found with name: " << searchName << endl;
-    }
+    } while (choice != 10);
 
     return 0;
 }
