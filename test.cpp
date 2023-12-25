@@ -152,35 +152,15 @@ public:
         }
     }
 
-    // Function to perform book return
-    void returnBook(const string &bookTitle)
-    {
-        Book returnedBook(bookTitle);
-        bookReturnQueue.push(returnedBook);
-        cout << "Book returned: " << bookTitle << endl;
-    }
-
     // Function to display books checked out
     void displayCheckedOutBooks()
     {
         cout << "Books Checked Out (Last-In-First-Out):\n";
-        stack<Book> tempStack = bookCheckoutStack; // Create a temporary stack to preserve the original stack
+        stack<Book> tempStack = bookCheckoutStack; // Create a temporary stack to preserve original stack
         while (!tempStack.empty())
         {
             cout << "Book: " << tempStack.top().title << endl;
             tempStack.pop();
-        }
-    }
-
-    // Function to display return queue
-    void displayReturnQueue()
-    {
-        cout << "Books in Return Queue (First-In-First-Out):\n";
-        queue<Book> tempQueue = bookReturnQueue; // Create a temporary queue to preserve the original queue
-        while (!tempQueue.empty())
-        {
-            cout << "Book: " << tempQueue.front().title << endl;
-            tempQueue.pop();
         }
     }
 };
@@ -290,8 +270,10 @@ int main()
     arrayBasedList.addStudent(Student("Abdullah Panther", 2, 23));
     arrayBasedList.addStudent(Student("Malik Arsal", 3, 28));
 
-    // Add some hardcoded books
+    // Declare availableBooks here
     vector<Book> availableBooks = {Book("The Catcher in the Rye"), Book("To Kill a Mockingbird"), Book("1984")};
+
+    // Use availableBooks in the BookManagementSystem constructor
     BookManagementSystem bookManagementSystem(availableBooks);
 
     int choice;
@@ -309,7 +291,7 @@ int main()
         cout << "7. Return Book\n";
         cout << "8. Display Checked Out Books\n";
         cout << "9. Display Return Queue\n";
-        cout << "10. Display Available Books\n";
+        cout << "10. Display Available Books\n"; // New menu option
         cout << "11. Exit\n";
         cout << "12. Display Hardcoded Students and Books\n";
 
@@ -387,10 +369,8 @@ int main()
         case 7:
         {
             // Return Book
-            string bookTitle;
-            cout << "Enter the title of the book to return: ";
-            getline(cin, bookTitle);
-            bookManagementSystem.returnBook(bookTitle);
+            // Note: Return function needs to be implemented
+            cout << "Returning book...\n";
             break;
         }
         case 8:
@@ -402,7 +382,8 @@ int main()
         case 9:
         {
             // Display Return Queue
-            bookManagementSystem.displayReturnQueue();
+            // Note: Return queue display function needs to be implemented
+            cout << "Displaying return queue...\n";
             break;
         }
         case 10:
