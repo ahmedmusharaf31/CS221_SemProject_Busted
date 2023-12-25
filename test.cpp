@@ -423,6 +423,7 @@ int main()
             cout << "Hardcoded Students:\n";
             arrayBasedList.displayStudents();
 
+            cout << endl;
             bookManagementSystem.displayAvailableBooks();
 
             cout << "\nHardcoded Books Checked Out:\n";
