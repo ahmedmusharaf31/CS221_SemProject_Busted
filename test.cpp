@@ -117,14 +117,39 @@ class BookManagementSystem
 private:
     stack<Book> bookCheckoutStack; // Stack for book checkout
     queue<Book> bookReturnQueue;   // Queue for book return
+    vector<Book> availableBooks;   // List of available books
 
 public:
+    // Constructor to initialize available books
+    BookManagementSystem(const vector<Book> &books) : availableBooks(books) {}
+
+    // Function to display available books
+    void displayAvailableBooks()
+    {
+        cout << "Available Books:\n";
+        for (const auto &book : availableBooks)
+        {
+            cout << "Book: " << book.title << endl;
+        }
+    }
+
     // Function to perform book checkout
     void checkoutBook(const string &bookTitle)
     {
-        Book book(bookTitle);
-        bookCheckoutStack.push(book);
-        cout << "Book checked out: " << bookTitle << endl;
+        auto it = find_if(availableBooks.begin(), availableBooks.end(), [&](const Book &b)
+                          { return b.title == bookTitle; });
+
+        if (it != availableBooks.end())
+        {
+            Book book = *it;
+            bookCheckoutStack.push(book);
+            availableBooks.erase(it);
+            cout << "Book checked out: " << bookTitle << endl;
+        }
+        else
+        {
+            cout << "Book not found or already checked out: " << bookTitle << endl;
+        }
     }
 
     // Function to display books checked out
@@ -239,18 +264,15 @@ public:
 
 int main()
 {
-    ArrayBasedList arrayBasedList;
-    LinkedList linkedList;
-    BookManagementSystem bookManagementSystem;
-
     // Add some hardcoded students
+    ArrayBasedList arrayBasedList;
     arrayBasedList.addStudent(Student("Ahmed Billa", 1, 25));
     arrayBasedList.addStudent(Student("Abdullah Panther", 2, 23));
     arrayBasedList.addStudent(Student("Arsal Pimp", 3, 28));
 
     // Add some hardcoded books
-    bookManagementSystem.checkoutBook("The Catcher in the Rye");
-    bookManagementSystem.checkoutBook("To Kill a Mockingbird");
+    vector<Book> availableBooks = {Book("The Catcher in the Rye"), Book("To Kill a Mockingbird"), Book("1984")};
+    BookManagementSystem bookManagementSystem(availableBooks);
 
     int choice;
 
@@ -372,6 +394,9 @@ int main()
             // Display Hardcoded Students and Books
             cout << "Hardcoded Students:\n";
             arrayBasedList.displayStudents();
+
+            cout << "\nAvailable Books:\n";
+            bookManagementSystem.displayAvailableBooks();
 
             cout << "\nHardcoded Books Checked Out:\n";
             bookManagementSystem.displayCheckedOutBooks();
