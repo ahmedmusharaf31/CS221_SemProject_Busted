@@ -152,12 +152,32 @@ public:
         }
     }
 
-    // Function to perform book return
+    // Function to return a book
     void returnBook(const string &bookTitle)
     {
-        Book returnedBook(bookTitle);
-        bookReturnQueue.push(returnedBook);
-        cout << "Book returned: " << bookTitle << endl;
+        if (!bookCheckoutStack.empty())
+        {
+            Book returnedBook = bookCheckoutStack.top();
+            bookCheckoutStack.pop();
+
+            // Check if the book is already in the availableBooks vector (prevent duplicates)
+            auto it = find_if(availableBooks.begin(), availableBooks.end(), [&](const Book &b)
+                              { return b.title == returnedBook.title; });
+
+            if (it == availableBooks.end())
+            {
+                availableBooks.push_back(returnedBook);
+                cout << "Book returned: " << bookTitle << endl;
+            }
+            else
+            {
+                cout << "Book is already in the available books. Duplicate return not allowed.\n";
+            }
+        }
+        else
+        {
+            cout << "No books to return. Checkout a book first.\n";
+        }
     }
 
     // Function to display books checked out
@@ -175,12 +195,12 @@ public:
     // Function to display return queue
     void displayReturnQueue()
     {
-        cout << "Books in Return Queue (First-In-First-Out):\n";
-        queue<Book> tempQueue = bookReturnQueue; // Create a temporary queue to preserve the original queue
-        while (!tempQueue.empty())
+        cout << "Books in Return Queue (Last-In-First-Out):\n";
+        stack<Book> tempStack = bookCheckoutStack; // Create a temporary stack to preserve the original stack
+        while (!tempStack.empty())
         {
-            cout << "Book: " << tempQueue.front().title << endl;
-            tempQueue.pop();
+            cout << "Book: " << tempStack.top().title << endl;
+            tempStack.pop();
         }
     }
 };
