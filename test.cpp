@@ -264,11 +264,12 @@ public:
 
 int main()
 {
+    cout << "Hello world!";
     // Add some hardcoded students
     ArrayBasedList arrayBasedList;
-    arrayBasedList.addStudent(Student("Ahmed Billa", 1, 25));
+    arrayBasedList.addStudent(Student("Ahmed Brehmn", 1, 25));
     arrayBasedList.addStudent(Student("Abdullah Panther", 2, 23));
-    arrayBasedList.addStudent(Student("Arsal Pimp", 3, 28));
+    arrayBasedList.addStudent(Student("Malik Arsal", 3, 28));
 
     // Add some hardcoded books
     vector<Book> availableBooks = {Book("The Catcher in the Rye"), Book("To Kill a Mockingbird"), Book("1984")};

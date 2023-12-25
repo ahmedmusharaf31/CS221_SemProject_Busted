@@ -52,7 +52,7 @@ public:
 			return nullptr; // Return nullptr if not found
 		}
 	}
-
+	
 	// Function to display all students in the array
 	void displayStudents()
 	{
