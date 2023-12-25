@@ -289,8 +289,9 @@ int main()
         cout << "7. Return Book\n";
         cout << "8. Display Checked Out Books\n";
         cout << "9. Display Return Queue\n";
-        cout << "10. Exit\n";
-        cout << "11. Display Hardcoded Students and Books\n";
+        cout << "10. Display Available Books\n"; // New menu option
+        cout << "11. Exit\n";
+        cout << "12. Display Hardcoded Students and Books\n";
 
         cout << "Enter your choice: ";
         cin >> choice;
@@ -385,11 +386,17 @@ int main()
         }
         case 10:
         {
+            // Display Available Books
+            bookManagementSystem.displayAvailableBooks();
+            break;
+        }
+        case 11:
+        {
             // Exit
             cout << "Exiting the Library Management System. Goodbye!\n";
             break;
         }
-        case 11:
+        case 12:
         {
             // Display Hardcoded Students and Books
             cout << "Hardcoded Students:\n";
@@ -408,7 +415,7 @@ int main()
         }
         }
 
-    } while (choice != 10);
+    } while (choice != 11);
 
     return 0;
 }
